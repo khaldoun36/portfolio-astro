@@ -1,23 +1,81 @@
+---
+import { Font } from "astro:assets";
+import "../styles/global.scss";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <Font cssVariable="--font-mona" />
+  </head>
+  <body>
+    <div class="content-grid">
+      <slot />
+    </div>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global lang="scss">
+  .content-grid {
+    --grid-cols: 0rem minmax(0, 1fr) 0rem;
+    --content-padding: 1rem;
+
+    position: relative;
+    isolation: isolate;
+
+    display: grid;
+    grid-template-columns: var(--grid-cols);
+
+    min-height: 100dvh;
+    align-content: start;
+
+    background: var(--almond);
+  }
+
+  /* Sheet layer */
+  .content-grid::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+
+    grid-column: 2 / 2;
+    inset: 0;
+
+    background: var(--ivory);
+
+    @include ds-border;
+  }
+
+  .content-grid > * {
+    grid-column: 2 / 2;
+    min-width: 0;
+
+    position: relative;
+    z-index: 1;
+
+    padding-inline: var(--content-padding);
+  }
+
+  .content-grid > .full-width {
+    grid-column: 1 / -1;
+  }
+
+  @media (width >= $tablet-bp) {
+    .content-grid {
+      --grid-cols: 2rem minmax(0, 1fr) 2rem;
+    }
+  }
+
+  @media (width >= $desktop-bp) {
+    .content-grid {
+      --grid-cols: minmax(0, 1fr) minmax(0, 1216px) minmax(0, 1fr);
+      --content-padding: 3rem;
+    }
+  }
 </style>
