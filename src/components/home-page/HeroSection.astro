@@ -1,0 +1,159 @@
+---
+import { Image } from "astro:assets";
+import profilePic from "../../assets/profile_picture.png";
+import { Icon } from "astro-icon/components";
+
+const socialLinks = [
+  {
+    title: "Github",
+    icon: "fa6-brands:github",
+    href: "https://github.com/khaldoun36",
+  },
+  {
+    title: "Linkedin",
+    icon: "fa6-brands:linkedin-in",
+    href: "https://www.linkedin.com/in/khaldoon-alnuaimi-8618b7350/",
+  },
+  {
+    title: "Bluesky",
+    icon: "fa6-brands:bluesky",
+    href: "https://bsky.app/profile/khaldoon.bsky.social",
+  },
+  {
+    title: "Threads",
+    icon: "fa6-brands:threads",
+    href: "https://bsky.app/profile/khaldoon.bsky.social",
+  },
+];
+---
+
+<main class="hero-section">
+  <Image
+    src={profilePic}
+    alt="A man with short dark hair and a beard, wearing a white traditional Middle Eastern garment with a mandarin collar, smiling in a headshot with a framed artwork and a light-colored curtain in the background."
+  />
+  <div>
+    <h1>Building products. Testing ideas. Chasing PRs.</h1>
+    <p>
+      I’m Khaldoon, a software developer, entrepreneur, and amateur athlete.
+      Currently building Bites, a social accountability platform for people
+      trying to lose weight.
+    </p>
+  </div>
+  <div class="social-links">
+    {
+      socialLinks.map((link) => (
+        <a
+          href={link.href}
+          class="link"
+          aria-label={`You are leaving the blog and going to ${link.title}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name={link.icon} size={24} />
+        </a>
+      ))
+    }
+  </div>
+</main>
+
+<style lang="scss">
+  .hero-section {
+    /* Scoped Variables */
+    --hero-max-width: 85ch;
+    --img-size: 4rem;
+    --link-size: 2.75rem;
+    --negative-margin: -0.625rem;
+    --transition-fast: 150ms ease;
+
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    /* Box Model */
+    max-width: var(--hero-max-width);
+
+    /* Children Styles */
+    & > img {
+      /* Box Model */
+      width: var(--img-size);
+      height: var(--img-size);
+
+      /* Aesthetics */
+      border-radius: var(--infinity);
+      @include ds-border;
+    }
+
+    & > .social-links {
+      /* Layout */
+      display: flex; /* Added for clarity */
+      flex-direction: row;
+      gap: 1.25rem;
+
+      /* Box Model */
+      margin-block-start: var(--negative-margin);
+
+      & > .link {
+        /* Layout */
+        display: grid;
+        place-content: center;
+
+        /* Box Model */
+        width: var(--link-size);
+        height: var(--link-size);
+
+        /* Aesthetics */
+        color: color-alpha(--deep-brown, 0.75);
+        transition: color var(--transition-fast);
+
+        &:first-child {
+          margin-inline-start: var(--negative-margin);
+        }
+      }
+    }
+  }
+
+  /* Typography & Content */
+  h1 {
+    @include text-3xl;
+    font-weight: 700;
+    margin-block-end: 1.5rem;
+  }
+
+  p {
+    @include text-md;
+    max-width: calc(var(--hero-max-width) * 0.75);
+  }
+
+  /* Interaction Focus */
+  @media (hover: hover) {
+    .link:hover {
+      color: color-alpha(--deep-brown, 1);
+    }
+
+    .social-links:has(.link:hover) .link:not(:hover) {
+      color: color-alpha(--deep-brown, 0.45);
+    }
+  }
+
+  /* Responsive Overrides */
+  @media (width >= $tablet-bp) {
+    .hero-section {
+      gap: 2.5rem;
+    }
+    h1 {
+      @include text-5xl;
+      margin-block-end: 2rem;
+    }
+    p {
+      @include text-lg;
+    }
+  }
+
+  @media (width >= $desktop-bp) {
+    h1 {
+      @include text-6xl;
+    }
+  }
+</style>
