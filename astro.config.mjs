@@ -1,17 +1,12 @@
 import { defineConfig, fontProviders } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 
 export default defineConfig({
   integrations: [icon()],
+
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          // Injects this line into every <style lang="scss"> block
-          additionalData: `@use "/src/styles/_utilities.scss" as *;`,
-        },
-      },
-    },
+    plugins: [tailwindcss()],
   },
 
   fonts: [

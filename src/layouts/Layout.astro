@@ -1,6 +1,6 @@
 ---
 import { Font } from "astro:assets";
-import "../styles/global.scss";
+import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -20,7 +20,10 @@ import "../styles/global.scss";
   </body>
 </html>
 
-<style is:global lang="scss">
+<style is:global>
+  /* Reference your main tailwind entry point */
+  @import "../styles/global.css" reference;
+
   .content-grid {
     --grid-cols: 0rem minmax(0, 1fr) 0rem;
     --content-padding: 1rem;
@@ -34,7 +37,7 @@ import "../styles/global.scss";
     min-height: 100dvh;
     align-content: start;
 
-    background: var(--almond);
+    background: var(--color-almond);
   }
 
   /* Sheet layer */
@@ -47,9 +50,9 @@ import "../styles/global.scss";
     grid-column: 2 / 2;
     inset: 0;
 
-    background: var(--ivory);
+    background: var(--color-ivory);
 
-    @include ds-border;
+    @apply ds-border;
   }
 
   .content-grid > * {
@@ -66,13 +69,13 @@ import "../styles/global.scss";
     grid-column: 1 / -1;
   }
 
-  @media (width >= $tablet-bp) {
+  @media (width >= 40rem) {
     .content-grid {
       --grid-cols: 2rem minmax(0, 1fr) 2rem;
     }
   }
 
-  @media (width >= $desktop-bp) {
+  @media (width >= 80rem) {
     .content-grid {
       --grid-cols: minmax(0, 1fr) minmax(0, 1216px) minmax(0, 1fr);
       --content-padding: 3rem;

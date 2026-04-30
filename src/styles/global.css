@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sand: oklch(84.64% 0.022 72.77);
+  --color-almond: oklch(91.04% 0.016 75.89);
+  --color-ivory: oklch(97.78% 0.005 92.87);
+  --color-deep-brown: oklch(24.16% 0.054 75.64);
+  --color-lemon: oklch(96.82% 0.209 109.78);
+  --color-bronze: oklch(63.15% 0.128 78.04);
+
+  --font-mona: var(--font-mona), sans-serif;
+
+  /* Clear the default Tailwind typography scale */
+  --text-*: initial;
+
+  /* Custom Typography Scale */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.125rem;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.875rem;
+
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.375rem;
+
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.75rem;
+  --text-4xl--letter-spacing: -0.02em;
+
+  --text-5xl: 2.75rem;
+  --text-5xl--line-height: 3.375rem;
+  --text-5xl--letter-spacing: -0.02em;
+
+  --text-6xl: 3rem;
+  --text-6xl--line-height: 3.75rem;
+  --text-6xl--letter-spacing: -0.02em;
+
+  --text-7xl: 3.75rem;
+  --text-7xl--line-height: 4.5rem;
+  --text-7xl--letter-spacing: -0.02em;
+
+  --text-8xl: 4.5rem;
+  --text-8xl--line-height: 5.625rem;
+  --text-8xl--letter-spacing: -0.02em;
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-almond text-deep-brown/75 font-mona;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-deep-brown;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  a,
+  li {
+    text-box: trim-both cap alphabetic;
+  }
+}
+
+@utility ds-border {
+  @apply ring-[1.25px] ring-deep-brown/10 shadow;
+}
