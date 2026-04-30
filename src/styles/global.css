@@ -20,7 +20,7 @@
   --text-sm: 0.875rem;
   --text-sm--line-height: 1.25rem;
 
-  --text-md: 1rem;
+  --text-sm: 1rem;
   --text-md--line-height: 1.5rem;
 
   --text-lg: 1.125rem;
@@ -67,7 +67,8 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  strong {
     @apply text-deep-brown;
   }
 
@@ -83,8 +84,14 @@
   li {
     text-box: trim-both cap alphabetic;
   }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-deep-brown);
+  }
 }
 
 @utility ds-border {
-  @apply ring-[1.25px] ring-deep-brown/10 shadow;
+  @apply ring-deep-brown/10 shadow ring-[1.25px];
 }

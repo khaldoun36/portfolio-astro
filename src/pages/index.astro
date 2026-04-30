@@ -1,8 +1,69 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HeroSection from "../components/home-page/HeroSection.astro";
+import JournalPost from "../components/JournalPost.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+
+const entries = [
+  {
+    author: "Mat Marquis",
+    datetime: "2026-04-23",
+    date: "23 April 2026",
+    title: "The end of responsive images",
+    excerpt:
+      "Mat Marquis has waited 14 years to write this article. The sizes attribute has been a necessary evil but now, with an auto value capability, it’s completely transformed authoring responsive images on the web.",
+    tag: "HTML",
+    href: "#",
+  },
+  {
+    author: "Rachel Andrew",
+    datetime: "2026-04-18",
+    date: "18 April 2026",
+    title: "The quiet power of CSS grid",
+    excerpt:
+      "CSS grid changed how we think about layout, but its best ideas are often the simplest ones: clear structure, flexible tracks, and layouts that respond without fighting the browser.",
+    tag: "CSS",
+    href: "#",
+  },
+  {
+    author: "Jeremy Keith",
+    datetime: "2026-04-12",
+    date: "12 April 2026",
+    title: "Building websites that last",
+    excerpt:
+      "The web rewards boring foundations. Semantic markup, resilient links, and progressive enhancement still do more for longevity than the latest framework trend.",
+    tag: "WEB",
+    href: "#",
+  },
+  {
+    author: "Sara Soueidan",
+    datetime: "2026-04-07",
+    date: "7 April 2026",
+    title: "Accessibility is design work",
+    excerpt:
+      "Accessibility is not a checklist at the end of a project. It is a design constraint, a technical discipline, and a way to make interfaces clearer for everyone.",
+    tag: "A11Y",
+    href: "#",
+  },
+  {
+    author: "Ahmad Shadeed",
+    datetime: "2026-04-01",
+    date: "1 April 2026",
+    title: "Modern layout debugging",
+    excerpt:
+      "From container queries to logical properties, modern CSS gives us better tools for building flexible interfaces. The challenge is knowing which tool solves the actual problem.",
+    tag: "DESIGN",
+    href: "#",
+  },
+];
 ---
 
 <Layout>
-  <HeroSection />
+  <HeroSection class="pb-20" />
+  <section>
+    <SectionTitle />
+    <div>
+      {entries.map((entry) => <JournalPost />)}
+    </div>
+  </section>
 </Layout>

@@ -2,6 +2,13 @@
 import { Image } from "astro:assets";
 import profilePic from "../../assets/profile_picture.png";
 import { Icon } from "astro-icon/components";
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 
 const socialLinks = [
   {
@@ -27,17 +34,17 @@ const socialLinks = [
 ];
 ---
 
-<main class="flex max-w-[85ch] flex-col gap-8 md:gap-10">
+<main class={twMerge("flex max-w-[85ch] flex-col gap-8 sm:gap-10", className)}>
   <Image
     class="ds-border size-16 rounded-full"
     src={profilePic}
     alt="A man with short dark hair and a beard, wearing a white traditional Middle Eastern garment with a mandarin collar, smiling in a headshot with a framed artwork and a light-colored curtain in the background."
   />
   <div>
-    <h1 class="mb-6 text-3xl font-bold md:mb-8 md:text-5xl lg:text-6xl">
+    <h1 class="mb-6 text-3xl font-bold sm:mb-8 sm:text-5xl lg:text-6xl">
       Building products. Testing ideas. Chasing PRs.
     </h1>
-    <p class="text-md max-w-prose md:text-lg">
+    <p class="text-md max-w-prose sm:text-lg">
       I’m Khaldoon, a software developer, entrepreneur, and amateur athlete.
       Currently building Bites, a social accountability platform for people
       trying to lose weight.
@@ -48,7 +55,7 @@ const socialLinks = [
       socialLinks.map((link) => (
         <a
           href={link.href}
-          class="grid size-11 place-content-center text-deep-brown/75 transition-colors  ease-in-out first:-ml-2.5 hover:text-deep-brown group-hover:text-deep-brown/45"
+          class="text-deep-brown/75 hover:text-deep-brown! group-has-[:hover]:text-deep-brown/45 grid size-11 place-content-center transition-colors ease-in-out first:-ml-2.5"
           aria-label={`${link.title} profile`}
           target="_blank"
           rel="noopener noreferrer"
