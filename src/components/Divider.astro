@@ -1,0 +1,12 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={twMerge("bg-deep-brown h-px w-full", className)} aria-hidden="true">
+</div>

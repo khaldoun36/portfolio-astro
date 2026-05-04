@@ -1,32 +1,65 @@
 ---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  datePublished?: Date;
+  tag: string;
+}
 
+const {
+  href,
+  title,
+  description,
+  datePublished = new Date(),
+  tag,
+} = Astro.props;
+
+// Format dates for the attribute and display
+const datetimeAttr = datePublished.toISOString().split("T")[0];
+const displayDate = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(datePublished);
 ---
 
 <article
-  class="grid border-b-[1.25px] md:grid-cols-[1fr_2fr] md:divide-x-[1.25px]"
+  class="py-section group relative justify-between gap-8 lg:grid lg:grid-cols-[20rem_1fr]"
 >
-  <aside class="row-start-2 space-y-4 py-10 pr-8 md:row-start-1">
-    <p class="sm:text-md text-sm">
-      By <strong>Mat Marquis</strong>
-    </p>
-    <time datetime="2026-04-23" class="sm:text-md text-sm">23 April 2026</time>
-  </aside>
-
-  <div class="-mx-10 space-y-6 p-10">
-    <h1 class="text-lg font-semibold sm:text-2xl lg:text-3xl">
-      The end of responsive images
+  <div class="max-w-prose self-start">
+    <h1
+      class="mb-6 text-xl font-semibold group-hover:underline sm:text-2xl lg:text-3xl"
+    >
+      <a href={href} class="after:absolute after:inset-0 after:z-10">
+        {title}
+      </a>
     </h1>
 
-    <p class="sm:text-md text-sm">
-      Mat Marquis has waited 14 years to write this article. The sizes attribute
-      has been a necessary evil but now, with an auto value capability, it’s
-      completely transformed authoring responsive images on the web.
+    <p class="sm:text-md mb-8 text-sm lg:mb-0">
+      {description}
     </p>
-
-    <a
-      href="#"
-      class="bg-almond text-deep-brown sm:text-md border px-3 py-1.5 text-sm"
-      >HTML</a
-    >
   </div>
+
+  <aside class="relative space-y-5 *:block lg:col-start-1 lg:row-start-1">
+    <time datetime={datetimeAttr} class="sm:text-md text-sm">{displayDate}</time
+    >
+    <p class="sm:text-md text-sm">
+      Tags: <strong>{tag}</strong>
+    </p>
+  </aside>
 </article>
+
+<style>
+  @media (width >= 64rem) {
+    aside::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: calc(100% + (var(--spacing-section) * 2));
+      right: 0;
+      top: calc(-1 * var(--spacing-section));
+      background-color: var(--color-deep-brown);
+    }
+  }
+</style>

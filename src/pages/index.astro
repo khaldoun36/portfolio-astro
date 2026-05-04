@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import HeroSection from "../components/home-page/HeroSection.astro";
 import JournalPost from "../components/JournalPost.astro";
 import SectionTitle from "../components/SectionTitle.astro";
+import Divider from "../components/Divider.astro";
 
 const entries = [
   {
@@ -59,11 +60,23 @@ const entries = [
 ---
 
 <Layout>
-  <HeroSection class="pb-20" />
+  <HeroSection class="mb-section" />
   <section>
     <SectionTitle />
     <div>
-      {entries.map((entry) => <JournalPost />)}
+      {
+        entries.map((entry, index) => (
+          <>
+            <JournalPost
+              href="https://piccalil.li/"
+              title={entry.title}
+              description={entry.excerpt}
+              tag={entry.tag}
+            />
+            {index !== entries.length - 1 && <Divider />}
+          </>
+        ))
+      }
     </div>
   </section>
 </Layout>

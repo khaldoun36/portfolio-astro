@@ -25,17 +25,15 @@ import "../styles/global.css";
   @import "../styles/global.css" reference;
 
   .content-grid {
-    --grid-cols: 0rem minmax(0, 1fr) 0rem;
-    --content-padding: 1rem;
+    --sheet-padding: 1rem;
+    --grid-cols: 0rem var(--sheet-padding) minmax(0, 1fr) var(--sheet-padding)
+      0rem;
 
     position: relative;
     isolation: isolate;
 
     display: grid;
     grid-template-columns: var(--grid-cols);
-
-    min-height: 100dvh;
-    align-content: start;
 
     background: var(--color-almond);
   }
@@ -47,7 +45,8 @@ import "../styles/global.css";
     z-index: 0;
     pointer-events: none;
 
-    grid-column: 2 / 2;
+    /* Spans across the padding and content columns (lines 2 through 5) */
+    grid-column: 2 / 5;
     inset: 0;
 
     background: var(--color-ivory);
@@ -56,30 +55,37 @@ import "../styles/global.css";
   }
 
   .content-grid > * {
-    grid-column: 2 / 2;
+    /* Places standard content exclusively in the center column */
+    grid-column: 3 / 4;
     min-width: 0;
 
     position: relative;
     z-index: 1;
+  }
 
-    padding-inline: var(--content-padding);
+  /* Optional utility if you want elements to break out to the padding edges */
+  .content-grid > .sheet-width {
+    grid-column: 2 / 5;
   }
 
   .content-grid > .full-width {
+    /* Spans all 5 columns */
     grid-column: 1 / -1;
   }
 
   @media (width >= 40rem) {
     .content-grid {
-      --grid-cols: 2rem minmax(0, 1fr) 2rem;
-      --content-padding: 2rem;
+      --sheet-padding: 2rem;
+      --grid-cols: 2rem var(--sheet-padding) minmax(0, 1fr) var(--sheet-padding)
+        2rem;
     }
   }
 
   @media (width >= 80rem) {
     .content-grid {
-      --grid-cols: minmax(0, 1fr) minmax(0, 1216px) minmax(0, 1fr);
-      --content-padding: 3rem;
+      --sheet-padding: 3rem;
+      --grid-cols: minmax(0, 1fr) var(--sheet-padding) minmax(0, 1216px)
+        var(--sheet-padding) minmax(0, 1fr);
     }
   }
 </style>

@@ -54,6 +54,8 @@
   --text-8xl: 4.5rem;
   --text-8xl--line-height: 5.625rem;
   --text-8xl--letter-spacing: -0.02em;
+
+  --spacing-section: clamp(3rem, 6.25vw, 5rem);
 }
 
 @layer base {
